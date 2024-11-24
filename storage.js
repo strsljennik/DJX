@@ -1,4 +1,3 @@
-const express = require('express');
 const storage = require('node-persist');
 const path = require('path');
 const fs = require('fs');
@@ -6,7 +5,7 @@ const fs = require('fs');
 // Putanja do direktorijuma u kojem će biti sačuvani podaci
 const storageDir = path.join(__dirname, 'cuvati');
 
-// Inicijalizacija skladišta
+// Automatska inicijalizacija skladišta
 async function initializeStorage() {
     try {
         // Ako direktorijum ne postoji, kreiraj ga
@@ -21,14 +20,17 @@ async function initializeStorage() {
             forgiveParseErrors: true, // ignoriši greške prilikom parsiranja podataka
         });
         console.log('[INFO] Skladište je uspešno inicijalizovano.');
+        console.log(`[INFO] Skladište se nalazi u direktorijumu: ${storageDir}`);
     } catch (error) {
         console.error('[ERROR] Greška pri inicijalizaciji skladišta:', error);
     }
 }
 
 // Funkcija za dodavanje ili ažuriranje podataka o gostu
-async function saveGuestData(nickname, color, ipAddress) {
+async function saveGuestData(nickname, color) {
     try {
+        await initializeStorage();
+
         // Provera da li je nickname validan
         if (!nickname || typeof nickname !== 'string') {
             console.error('[ERROR] Nickname mora biti prosleđen i mora biti tipa string!');
@@ -39,7 +41,6 @@ async function saveGuestData(nickname, color, ipAddress) {
         const guestData = {
             nik: nickname,
             color: color || 'default',  // Ako boja nije prosleđena, koristi 'default'
-            ip: ipAddress || 'Nema IP adrese', // Sačuvaj IP adresu
         };
 
         // Logovanje podataka pre nego što ih sačuvamo
@@ -52,21 +53,6 @@ async function saveGuestData(nickname, color, ipAddress) {
         console.error(`[ERROR] Greška prilikom čuvanja podataka za gosta ${nickname}:`, err);
     }
 }
-
-// POST ruter za unos podataka o gostu
-const app = express();
-app.use(express.json());
-
-app.post('/save', async (req, res) => {
-    const { nickname, color } = req.body;
-    const ipAddress = req.ip;  // Dohvata IP adresu korisnika sa zahteva
-
-    // Poziv funkcije da sačuva podatke o gostu
-    await saveGuestData(nickname, color, ipAddress);
-
-    // Odgovaramo korisniku
-    res.send('Podaci su sačuvani!');
-});
 
 // Funkcija za učitavanje svih gostiju
 async function loadAllGuests() {
@@ -97,16 +83,26 @@ async function loadAllGuests() {
     }
 }
 
+// Testiranje servera
+async function testServer() {
+    await saveGuestData('gost-1', 'plava');
+    await saveGuestData('gost-2', 'crvena');
+    await loadAllGuests();
+}
+
 // Pokreni server
 async function startServer() {
-    // Prvo inicijalizuj skladište
-    await initializeStorage(); 
+    await initializeStorage();
     console.log('[INFO] Server je spreman!');
     await loadAllGuests();
 }
 
-// Pokreni server na portu 3000
-app.listen(3000, () => {
-    console.log('Server pokrenut na portu 3000');
-    startServer();
-});
+// Pokreni server
+startServer();
+
+// Izvoz funkcija za dodatnu upotrebu
+module.exports = {
+    saveGuestData,
+    loadAllGuests,
+    initializeStorage,
+};
