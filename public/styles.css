@@ -108,12 +108,12 @@ body {
     position: absolute;
     top: 95px;
     left: 5px;
-    right: 185px;
+    right: 210px;
     bottom: 0px;
     padding: 10px;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow-y: auto; 3px; top:200px; bottom 200px;
 }
 
 .message {
