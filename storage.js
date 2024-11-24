@@ -100,7 +100,7 @@ async function loadAllGuests() {
 
 // Pokreni server
 async function startServer() {
-    await initializeStorage();
+    await initializeStorage();  // Inicijalizuj storage pre nego što nastavimo sa serverom
     console.log('[INFO] Server je spreman!');
     await loadAllGuests();
 }
