@@ -44,11 +44,13 @@
         <textarea id="chatInput" rows="1" placeholder="Type your message..."></textarea>
     </div>
 
-    <div id="guestList">
-         <!-- Ostali gosti će se ovde dodavati -->
-       <!-- Gosti sa bojama će biti ovde prikazani -->
+   div class="guest">
+     <div class="button-wrapper">
+        <button onclick="boldText()">B</button>
+        <button onclick="italicText()">I</button>
+        <input type="color" class="colorPicker" onchange="changeColor(this.value)" />
+    </div>
 </div>
-
     
 </div>
 <script src="formatiranje.js"></script> <!-- Povezivanje JavaScript datoteke -->
