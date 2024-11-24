@@ -150,8 +150,35 @@ body {
 }
 
 .guest {
+    font-size: 20px;
     padding: 5px;
     border-bottom: 1px solid white;
     cursor: pointer;
     color: inherit; /* Ensure dynamic color from JS is applied */
+    .guest::before {
+    content: "•";  /* Tačka pre imena gostiju */
+    color: white;   /* Bela boja tačke */
+    margin-right: 10px;
 }
+    .colorPicker {
+    margin-left: 10px;
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* Stil za poruke konobarice */
+.konobarica {
+    color: #ff6347; /* Boja za Konobaricu */
+    font-weight: bold; /* Bold za Konobaricu */
+    font-style: italic; /* Italic za Konobaricu */
+}
+
+/* Stil za sistemske poruke */
+.system-message {
+    font-style: italic;
+    color: #888;
+}
+
+
