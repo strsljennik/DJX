@@ -10,7 +10,7 @@ const storageDir = path.join(__dirname, 'cuvati');
 const app = express();
 app.use(express.json()); // Omogućava parsiranje JSON tela u zahtevima
 
-// Automatska inicijalizacija skladišta
+// Inicijalizacija skladišta
 async function initializeStorage() {
     try {
         // Ako direktorijum ne postoji, kreiraj ga
@@ -100,7 +100,8 @@ async function loadAllGuests() {
 
 // Pokreni server
 async function startServer() {
-    await initializeStorage();  // Inicijalizuj storage pre nego što nastavimo sa serverom
+    // Prvo inicijalizuj skladište
+    await initializeStorage(); 
     console.log('[INFO] Server je spreman!');
     await loadAllGuests();
 }
