@@ -113,7 +113,7 @@ body {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    overflow-y: auto; 3px; top:200px; bottom 200px;
+    overflow-y: auto; 
 }
 
 .message {
