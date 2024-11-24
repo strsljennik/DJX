@@ -1,6 +1,22 @@
+.guest {
+    display: flex;
+    flex-direction: column; /* Raspoređuje goste u kolonu */
+    align-items: flex-start; /* Poravnava sve na levo */
+    margin-bottom: 10px; /* Razmak ispod svakog gosta */
+}
+
+.button-wrapper {
+    display: flex; /* Raspoređuje dugmad u red */
+    margin-bottom: 5px; /* Razmak ispod dugmića */
+}
+
+button {
+    margin-right: 5px; /* Razmak između dugmića */
+}
+
 /* Input za boje (manje stilizovan) */
 .colorPicker {
-    margin-left: 10px;
+    margin-top: 5px; /* Razmak između imena gosta i color picker-a */
     padding: 5px;
     border: none;
     background-color: transparent;
@@ -19,6 +35,3 @@
     font-style: italic;
     color: #888;
 }
-
-
-
