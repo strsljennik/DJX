@@ -68,23 +68,6 @@ socket.on('chatMessage', function(data) {
 
 // Funkcija za dodavanje stilova gostima
 function addGuestStyles(guestElement, guestId) {
-    // Bold Button (Pre imena)
-    const boldButton = document.createElement('button');
-    boldButton.textContent = 'B';
-    boldButton.addEventListener('click', function() {
-        guestElement.style.fontWeight = guestElement.style.fontWeight === 'bold' ? 'normal' : 'bold';
-        guestsData[guestId].isBold = guestElement.style.fontWeight === 'bold';
-    });
-
-    // Italic Button (Posle imena)
-    const italicButton = document.createElement('button');
-    italicButton.textContent = 'I';
-    italicButton.addEventListener('click', function() {
-        guestElement.style.fontStyle = guestElement.style.fontStyle === 'italic' ? 'normal' : 'italic';
-        guestsData[guestId].isItalic = guestElement.style.fontStyle === 'italic';
-    });
-
-    // Color Picker Button (Ispod imena)
     const colorPickerButton = document.createElement('input');
     colorPickerButton.type = 'color';
     colorPickerButton.classList.add('colorPicker');
@@ -94,15 +77,23 @@ function addGuestStyles(guestElement, guestId) {
         guestsData[guestId].color = this.value; // Ažuriraj boju u objektu
     });
 
-    // Dodaj Bold dugme pre imena
-    guestElement.appendChild(boldButton);
-    guestElement.appendChild(document.createTextNode(guestElement.textContent)); // Dodaj ime
+    const boldButton = document.createElement('button');
+    boldButton.textContent = 'B';
+    boldButton.addEventListener('click', function() {
+        guestElement.style.fontWeight = guestElement.style.fontWeight === 'bold' ? 'normal' : 'bold';
+        guestsData[guestId].isBold = guestElement.style.fontWeight === 'bold';
+    });
 
-    // Dodaj Italic dugme posle imena
-    guestElement.appendChild(italicButton);
+    const italicButton = document.createElement('button');
+    italicButton.textContent = 'I';
+    italicButton.addEventListener('click', function() {
+        guestElement.style.fontStyle = guestElement.style.fontStyle === 'italic' ? 'normal' : 'italic';
+        guestsData[guestId].isItalic = guestElement.style.fontStyle === 'italic';
+    });
 
-    // Dugme za boju postavi ispod imena
     guestElement.appendChild(colorPickerButton);
+    guestElement.appendChild(boldButton);
+    guestElement.appendChild(italicButton);
 }
 
 // Kada nov gost dođe
