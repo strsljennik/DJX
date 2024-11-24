@@ -1,22 +1,26 @@
+/* Stil za sve goste (uključujući admina i DJ-a) */
 .guest {
     display: flex;
-    flex-direction: column; /* Raspoređuje goste u kolonu */
-    align-items: flex-start; /* Poravnava sve na levo */
-    margin-bottom: 10px; /* Razmak ispod svakog gosta */
+    align-items: center;
+    font-size: 16px;
+    margin: 5px 0;
+    padding-left: 20px; /* Da bismo omogućili prostor za ikonu */
+    font-weight: bold;  /* Dodajemo bold */
+    font-style: italic; /* Dodajemo italic */
+    color: inherit; /* Nasleđivanje boje od JavaScript-a */
 }
 
-.button-wrapper {
-    display: flex; /* Raspoređuje dugmad u red */
-    margin-bottom: 5px; /* Razmak ispod dugmića */
-}
-
-button {
-    margin-right: 5px; /* Razmak između dugmića */
+/* Stil za ostale goste, sve imaju istu osnovnu postavku */
+.guest::before {
+    content: "•";  /* Tačka pre imena gostiju */
+    color: white;   /* Bela boja tačke */
+    margin-right: 10px;
+    font-size: 18px;
 }
 
 /* Input za boje (manje stilizovan) */
 .colorPicker {
-    margin-top: 5px; /* Razmak između imena gosta i color picker-a */
+    margin-left: 10px;
     padding: 5px;
     border: none;
     background-color: transparent;
@@ -35,3 +39,6 @@ button {
     font-style: italic;
     color: #888;
 }
+
+
+
