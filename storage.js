@@ -6,10 +6,6 @@ const fs = require('fs');
 // Putanja do direktorijuma u kojem će biti sačuvani podaci
 const storageDir = path.join(__dirname, 'cuvati');
 
-// Inicijalizacija aplikacije
-const app = express();
-app.use(express.json()); // Omogućava parsiranje JSON tela u zahtevima
-
 // Inicijalizacija skladišta
 async function initializeStorage() {
     try {
@@ -58,6 +54,9 @@ async function saveGuestData(nickname, color, ipAddress) {
 }
 
 // POST ruter za unos podataka o gostu
+const app = express();
+app.use(express.json());
+
 app.post('/save', async (req, res) => {
     const { nickname, color } = req.body;
     const ipAddress = req.ip;  // Dohvata IP adresu korisnika sa zahteva
